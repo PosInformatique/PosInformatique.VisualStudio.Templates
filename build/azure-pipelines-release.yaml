@@ -51,7 +51,7 @@ jobs:
   - task: CopyFiles@2
     displayName: Prepares Visual Studio Templates to be published
     inputs:
-      SourceFolder: '$(Build.BinariesDirectory)/Visual Studio Templates'
+      SourceFolder: '$(Build.BinariesDirectory)/PosInformatique Visual Studio Templates'
       Contents: '**'
       TargetFolder: '$(Build.ArtifactStagingDirectory)/visualstudio-extensions/'
   
