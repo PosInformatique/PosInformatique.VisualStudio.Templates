@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>Class.cs</DefaultName>
+    <Name>P.O.S Informatique C# Class</Name>
+    <Description>P.O.S Informatique C# Class</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>20</SortOrder>
+    <Icon Package="{FAE04EC1-301F-11d3-BF4B-00C04F79EFBC}" ID="4515" />
+    <TemplateGroupID>AspNetCore</TemplateGroupID>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">Class.cs</ProjectItem>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>PosInformatique.VisualStudio.Templates, Version=0.0.0.0, Culture=Neutral, PublicKeyToken=889b4f35d1c32a46</Assembly>
+    <FullClassName>PosInformatique.VisualStudio.Templates.CompanySelectionWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

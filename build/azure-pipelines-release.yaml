@@ -1,0 +1,71 @@
+parameters:
+- name: Version
+  displayName: The version of the Visual Studio Templates
+  type: string
+  default: 1.0.0.0
+
+trigger: none
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  Configuration: Debug
+  Platform: Any CPU
+  Solution: PosInformatique.VisualStudio.Templates.sln
+
+jobs:
+- job: Build
+  displayName: Build the Visual Studio Templates
+  steps:
+  - task: PowerShell@2
+    name: UpdateBuildNumber
+    displayName: Update build number
+    inputs:
+      targetType: 'inline'
+      script: 'Write-Host "##vso[build.updatebuildnumber]${{parameters.Version}}"'
+
+  - task: NuGetToolInstaller@1
+    displayName: Install NuGet
+  
+  - task: NuGetCommand@2
+    displayName: Restore NuGet packages
+    inputs:
+      command: 'restore'
+      restoreSolution: '$(Solution)'
+      feedsToUse: 'select'
+
+  - task: MSBuild@1
+    displayName: Build Visual Studio Templates
+    inputs:
+      solution: 'VisualStudio.Templates.package.proj'
+      msbuildArguments: '
+        /t:Publish
+        /p:Version=${{parameters.Version}}
+        /p:OutDir="$(Build.BinariesDirectory)"
+        /p:PublishUrl="https://$(WebAppName).azurewebsites.net/visualstudio-extensions/"'
+      msbuildArchitecture: 'x64'
+      platform: '$(Platform)'
+      configuration: '$(Configuration)'
+  
+  - task: CopyFiles@2
+    displayName: Prepares Visual Studio Templates to be published
+    inputs:
+      SourceFolder: '$(Build.BinariesDirectory)/PosInformatique Visual Studio Templates'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/visualstudio-extensions/'
+  
+  - task: AzureRmWebAppDeployment@4
+    displayName: Publish the Visual Studio Templates
+    inputs:
+      ConnectionType: 'AzureRM'
+      azureSubscription: '$(AzureSubscription)'
+      appType: 'webApp'
+      WebAppName: '$(WebAppName)'
+      packageForLinux: '$(Build.ArtifactStagingDirectory)/'
+      enableCustomDeployment: true
+      DeploymentType: 'webDeploy'
+      TakeAppOfflineFlag: false
+      RemoveAdditionalFilesFlag: true
+      ExcludeFilesFromAppDataFlag: false
+  
