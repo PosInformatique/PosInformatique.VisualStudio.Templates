@@ -5,6 +5,15 @@ as *white label* when working for different customers.
 
 These templates follow the StyleCop and Microsoft coding conventions.
 
+- [White label companies of the templates](#white-label-companies-of-the-templates)
+  - [Companies settings file](#companies-settings-file)
+- [Visual Studio item templates](#visual-studio-item-templates)
+- [Packaging of the Visual Studio Templates](#packaging-of-the-visual-studio-templates)
+  - [Build the VSIX package](#build-the-vsix-package)
+  - [Generate the ATOM feed for the private extensions gallery](#generate-the-atom-feed-for-the-private-extensions-gallery)
+- [Build and deploy the Visual Studio templates](#build-and-deploy-the-visual-studio-templates)
+- [Install the Visual Studio Templates](#install-the-visual-studio-templates)
+
 ## White label companies of the templates
 If you work in a *Digital Services Company* with multiple customers, the source code edited
 belong to your customer and maybe you have to write the customer company name on the header.
@@ -18,8 +27,8 @@ For example, for the *P.O.S Informatique* company:
 //-----------------------------------------------------------------------
 ```
 
-If now you switch to another customer called *Chantier Connect*, the header of the C# files
-will be this one:
+If you switch to another customer called *Chantier Connect*, the header of the C# files
+will be:
 ```csharp
 //-----------------------------------------------------------------------
 // <copyright file="BrandSelectionWizard.cs" company="Chantier Connect">
@@ -37,15 +46,14 @@ templates will ask you the name of the company to put on the header.
 
 ### Companies settings file
 
-The name of the company is asked only on time for each solution.
-The association between the company and the solution are saved in a mapping file
-between company/solution file name is save in the following file:
+The company name is asked only once for each solution.
+The association between the company and the solutions are saved in the following mapping file:
 
 ```
 C:\Users\<Windows user>\AppData\Local\P.O.S Informatique\Visual Studio\Templates\Companies.json
 ```
 
-If you need to reset the mapping association between the company and solution, just delete
+If you need to reset the mapping association between the company and solutions, just delete
 this file. The Visual Studio extension will ask you again the name of the company when adding
 a file with the template.
 
@@ -103,8 +111,10 @@ To deploy the Visual Studio you can use the
 Azure Pipeline YAML provided in the repository.
 
 This Azure Pipeline YAML allows to publish the Visual Studio Templates extensions
-inside an Azure Web App and required 3 parameters:
+inside an Azure Web App and required 1 parameter:
 - `Version`: The version of the Visual Studio Templates extensions to build.
+
+And 2 variables:
 - `AzureSubscription`: The name of the Azure Subscription which contains the Azure Web App
 - `WebAppName`: The name of the Azure Web App where to publish the extensions.
 
