@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
         <Identity Id="PosInformatique.VisualStudio.Templates" Version="0.0.0" Language="en-US" Publisher="P.O.S Informatique" />
-        <DisplayName>P.O.S Informatique DevTools for Visual Studio</DisplayName>
+        <DisplayName>P.O.S Informatique Visual Studio Templates</DisplayName>
         <Description xml:space="preserve">P.O.S Informatique Visual Studio Templates</Description>
     </Metadata>
     <Installation>
