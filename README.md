@@ -3,7 +3,8 @@
 This repository contains Visual Studio templates of P.O.S Informatique company and can be used
 as *white label* when working for different customers.
 
-These templates follow the StyleCop and Microsoft coding conventions.
+These templates follow the [StyleCop](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
+and [Microsoft coding conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions).
 
 - [White label companies of the templates](#white-label-companies-of-the-templates)
   - [Companies settings file](#companies-settings-file)
@@ -21,7 +22,7 @@ belong to your customer and maybe you have to write the customer company name on
 For example, for the *P.O.S Informatique* company:
 ```csharp
 //-----------------------------------------------------------------------
-// <copyright file="BrandSelectionWizard.cs" company="P.O.S Informatique">
+// <copyright file="CustomerManager.cs" company="P.O.S Informatique">
 //     Copyright (c) P.O.S Informatique. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -31,7 +32,7 @@ If you switch to another customer called *Chantier Connect*, the header of the C
 will be:
 ```csharp
 //-----------------------------------------------------------------------
-// <copyright file="BrandSelectionWizard.cs" company="Chantier Connect">
+// <copyright file="CustomerManager.cs" company="Chantier Connect">
 //     Copyright (c) Chantier Connect. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
