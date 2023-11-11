@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>Exception.cs</DefaultName>
+    <Name>P.O.S Informatique C# Exception Unit Test</Name>
+    <Description>P.O.S Informatique C# exception unit test class.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>110</SortOrder>
+    <Icon Package="{52CBD135-1F97-2580-011F-C7CD052E44DE}" ID="216" />
+    <TemplateGroupID>AspNetCore</TemplateGroupID>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">ExceptionUnitTest.cs</ProjectItem>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>PosInformatique.VisualStudio.Templates, Version=0.0.0.0, Culture=Neutral, PublicKeyToken=889b4f35d1c32a46</Assembly>
+    <FullClassName>PosInformatique.VisualStudio.Templates.CompanySelectionWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>
