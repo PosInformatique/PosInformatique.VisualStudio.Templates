@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace $rootnamespace$.Tests
+namespace $rootnamespace$
 {
     public class $safeitemname$
     {
