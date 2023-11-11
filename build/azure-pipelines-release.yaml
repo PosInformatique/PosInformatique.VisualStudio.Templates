@@ -16,7 +16,7 @@ variables:
 
 jobs:
 - job: Build
-  displayName: Build the Visual Studio Templates.
+  displayName: Build the Visual Studio Templates
   steps:
   - task: PowerShell@2
     name: UpdateBuildNumber
