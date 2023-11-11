@@ -41,17 +41,22 @@ will be:
 It is not easy to have manage and have different templates for each customers.
 
 To fix this issue and allow to work with different companies with the same Visual Studio instance, these
-templates will ask you the name of the company to put on the header.
+templates, will read the `stylecop.json` file in your project and extract the company name.
+See the [Configuring StyleCop Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md)
+for more information.
+
+If no `stylecop.json` file exists, a wizard will be displayed to ask you the name of the company to put on the header.
 
 ![Ask Company](docs/AskCompany.png)
 
 ### Companies settings file
 
-The company name is asked only once for each solution.
+If there is no `stylecop.json` file associated to the project, the company name is asked 
+only once for each solution stored in your computer.
 The association between the company and the solutions are saved in the following mapping file:
 
 ```
-C:\Users\<Windows user>\AppData\Roaming\P.O.S Informatique\Visual Studio\Templates\Companies.json
+C:\Users\<Windows user>\AppData\Local\P.O.S Informatique\Visual Studio\Templates\Companies.json
 ```
 
 If you need to reset the mapping association between the company and solutions, just delete
@@ -70,6 +75,8 @@ The [PosInformatique.VisualStudio.Templates.sln](PosInformatique.VisualStudio.Te
   - [Exception.cs](./src/VisualStudio.Templates.Files/Exception.cs): C# exception class
   - [ExceptionUnitTest.cs](./src/VisualStudio.Templates.Files/ExceptionUnitTest.cs): C# exception unit test class
   - [Interface.cs](./src/VisualStudio.Templates.Files/Interface.cs): C# interface
+  - [RazorComponent.razor](./src/VisualStudio.Templates.Files/RazorComponent.razor): Razor component (a separate code behind C# class is included)
+    - [RazorComponent.razor.cs](./src/VisualStudio.Templates.Files/RazorComponent.razor.cs): Razor component code behind (in C#).
   - [XUnitTest.cs](./src/VisualStudio.Templates.Files/XUnitTest.cs): C# XUnit test class
 
 ![Templates](docs/Templates.png)
