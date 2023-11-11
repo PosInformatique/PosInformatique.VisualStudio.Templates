@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="$safeitemname$.cs" company="$company$">
+// <copyright file="$rootname$" company="$company$">
 //     Copyright (c) $company$. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
