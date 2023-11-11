@@ -81,6 +81,10 @@
     <Compile Include="CompanySelectionWizard.cs" />
     <Compile Include="ISolutionRepository.cs" />
     <Compile Include="Solution.cs" />
+    <Compile Include="StyleCop\StyleCopConfiguration.cs" />
+    <Compile Include="StyleCop\StyleCopConfigurationDocumentationRules.cs" />
+    <Compile Include="StyleCop\StyleCopConfigurationSettings.cs" />
+    <Compile Include="VisualStudio\ProjectInteropWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
