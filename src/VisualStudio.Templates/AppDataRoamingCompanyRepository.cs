@@ -20,7 +20,7 @@ namespace PosInformatique.VisualStudio.Templates
         public AppDataRoamingCompanyRepository()
         {
             this.settingsFilePath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 @"P.O.S Informatique\Visual Studio\Templates\Companies.json");
         }
 

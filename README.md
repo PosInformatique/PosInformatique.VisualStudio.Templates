@@ -51,7 +51,7 @@ The company name is asked only once for each solution.
 The association between the company and the solutions are saved in the following mapping file:
 
 ```
-C:\Users\<Windows user>\AppData\Local\P.O.S Informatique\Visual Studio\Templates\Companies.json
+C:\Users\<Windows user>\AppData\Roaming\P.O.S Informatique\Visual Studio\Templates\Companies.json
 ```
 
 If you need to reset the mapping association between the company and solutions, just delete
