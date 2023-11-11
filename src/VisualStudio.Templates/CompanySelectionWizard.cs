@@ -12,6 +12,8 @@ namespace PosInformatique.VisualStudio.Templates
     using EnvDTE;
     using Microsoft.VisualStudio.TemplateWizard;
     using Microsoft.VisualStudio.Shell;
+    using Microsoft.VisualStudio.Shell.Interop;
+    using System.IO;
 
     public class CompanySelectionWizard : IWizard
     {
@@ -25,8 +27,7 @@ namespace PosInformatique.VisualStudio.Templates
         {
         }
 
-        public void ProjectItemFinishedGenerating(ProjectItem
-            projectItem)
+        public void ProjectItemFinishedGenerating(ProjectItem projectItem)
         {
         }
 
@@ -40,7 +41,60 @@ namespace PosInformatique.VisualStudio.Templates
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            var dte = (DTE)Package.GetGlobalService(typeof(DTE));
+            string company = null;
+
+            // Check if StyleCop settings file already exists
+            var projectInteropWrapper = new ProjectInteropWrapper((IVsProject4)customParams[1]);
+
+            var styleCopSettingsFilePath = projectInteropWrapper.GetDocumentFilePath("stylecop.json");
+
+            if (styleCopSettingsFilePath != null)
+            {
+                using (var fileStream = File.OpenRead(styleCopSettingsFilePath))
+                {
+                    var styleCopConfiguration = StyleCopConfiguration.LoadFrom(fileStream);
+
+                    if (styleCopConfiguration != null)
+                    {
+                        company = styleCopConfiguration.Settings.DocumentationRules.CompanyName;
+                    }
+                }
+            }
+
+            // If company is null ask the company to the developer
+            if (company == null)
+            {
+                company = AskCompany((DTE)automationObject);
+            }
+
+            if (company != null)
+            {
+                replacementsDictionary.Add("$company$", company);
+
+                // For the unit tests, add a setting without "Test" suffix
+                var safeItemName = replacementsDictionary["$safeitemname$"];
+                var classNameUnderTest = safeItemName;
+
+                if (safeItemName.EndsWith("Test"))
+                {
+                    classNameUnderTest = safeItemName.Substring(0, safeItemName.Length - "Test".Length);
+                }
+
+                replacementsDictionary.Add("$classnameundertest$", classNameUnderTest);
+
+                this.shouldAddProjectItem = true;
+            }
+        }
+
+        public bool ShouldAddProjectItem(string filePath)
+        {
+            return this.shouldAddProjectItem;
+        }
+
+        private static string AskCompany(DTE dte)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             var solutionFilePath = dte.Solution.FileName;
 
             var repository = new AppDataRoamingCompanyRepository();
@@ -53,44 +107,25 @@ namespace PosInformatique.VisualStudio.Templates
                 .ToArray();
 
             // Finds the company associated to the solution.
-            string company;
             var solutionFound = solutions.FirstOrDefault(s => s.Path.Equals(solutionFilePath, StringComparison.CurrentCultureIgnoreCase));
 
             if (solutionFound != null)
             {
-                company = solutionFound.Company;
-
-                this.shouldAddProjectItem = true;
+                return solutionFound.Company;
             }
             else
             {
-                company = CompanySelectionForm.ShowDialog(companies, "P.O.S Informatique", dte.MainWindow.HWnd);
+                var company = CompanySelectionForm.ShowDialog(companies, "P.O.S Informatique", dte.MainWindow.HWnd);
 
                 if (company != null)
                 {
                     repository.Save(new Solution(dte.Solution.FileName, company));
 
-                    this.shouldAddProjectItem = true;
+                    return company;
                 }
             }
 
-            replacementsDictionary.Add("$company$", company);
-
-            // For the unit tests, add a setting without "Test" suffix
-            var safeItemName = replacementsDictionary["$safeitemname$"];
-            var classNameUnderTest = safeItemName;
-
-            if (safeItemName.EndsWith("Test"))
-            {
-                classNameUnderTest = safeItemName.Substring(0, safeItemName.Length - "Test".Length);
-            }
-
-            replacementsDictionary.Add("$classnameundertest$", classNameUnderTest);
-        }
-
-        public bool ShouldAddProjectItem(string filePath)
-        {
-            return this.shouldAddProjectItem;
+            return null;
         }
     }
 }

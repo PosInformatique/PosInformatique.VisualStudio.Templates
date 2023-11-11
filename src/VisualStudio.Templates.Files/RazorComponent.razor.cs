@@ -6,9 +6,9 @@
 
 namespace $rootnamespace$
 {
-    public class $safeitemrootname$
+    public partial class $safeitemname$
     {
-        public $safeitemrootname$()
+		public $safeitemname$()
         {
         }
     }

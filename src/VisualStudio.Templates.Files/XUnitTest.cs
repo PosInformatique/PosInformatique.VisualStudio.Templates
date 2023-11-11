@@ -1,10 +1,10 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="$safeitemname$.cs" company="$company$">
+// <copyright file="$rootname$" company="$company$">
 //     Copyright (c) $company$. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace $rootnamespace$.Tests
+namespace $rootnamespace$
 {
     public class $safeitemname$
     {
