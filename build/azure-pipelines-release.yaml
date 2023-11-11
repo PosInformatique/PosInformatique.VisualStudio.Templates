@@ -13,8 +13,6 @@ variables:
   Configuration: Debug
   Platform: Any CPU
   Solution: PosInformatique.VisualStudio.Templates.sln
-  AzureSubscription: <<To change>>
-  WebAppName: <<To change>>
 
 jobs:
 - job: Build
