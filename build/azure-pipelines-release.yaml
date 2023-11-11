@@ -41,7 +41,7 @@ jobs:
       solution: 'VisualStudio.Templates.package.proj'
       msbuildArguments: '
         /t:Publish
-        /p:Version={{parameters.Version}}
+        /p:Version=${{parameters.Version}}
         /p:OutDir="$(Build.BinariesDirectory)"
         /p:PublishUrl="https://$(WebAppName).azurewebsites.net/visualstudio-extensions/"'
       msbuildArchitecture: 'x64'
