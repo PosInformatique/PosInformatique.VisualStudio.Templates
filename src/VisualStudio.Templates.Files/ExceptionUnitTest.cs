@@ -13,7 +13,7 @@ namespace $rootnamespace$
         {
             var exception = new $classnameundertest$();
 
-            exception.Message.Should().Be("Exception of type '$rootnamespace$.$classnameundertest$' was thrown.");
+            exception.Message.Should().Be("Exception of type '$namespaceundertest$.$classnameundertest$' was thrown.");
             exception.InnerException.Should().BeNull();
         }
 
