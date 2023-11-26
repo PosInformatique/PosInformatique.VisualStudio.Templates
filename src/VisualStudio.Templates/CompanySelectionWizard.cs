@@ -82,6 +82,17 @@ namespace PosInformatique.VisualStudio.Templates
 
                 replacementsDictionary.Add("$classnameundertest$", classNameUnderTest);
 
+                // For unit tests of the exception, add a setting without the "Tests" namespace suffix
+                var rootnamespace = replacementsDictionary["$rootnamespace$"];
+                var namespaceundertest = rootnamespace;
+
+                if (namespaceundertest.EndsWith("Tests"))
+                {
+                    namespaceundertest = namespaceundertest.Substring(0, namespaceundertest.Length - ".Tests".Length);
+                }
+
+                replacementsDictionary.Add("$namespaceundertest$", namespaceundertest);
+
                 this.shouldAddProjectItem = true;
             }
         }
