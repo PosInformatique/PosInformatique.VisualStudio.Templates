@@ -2,7 +2,7 @@ parameters:
 - name: Version
   displayName: The version of the Visual Studio Templates
   type: string
-  default: 1.1.0.0
+  default: 1.1.2.0
 
 trigger: none
 
