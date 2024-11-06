@@ -56,7 +56,7 @@ namespace PosInformatique.VisualStudio.Templates
 
                     if (styleCopConfiguration != null)
                     {
-                        company = styleCopConfiguration.Settings.DocumentationRules.CompanyName;
+                        company = styleCopConfiguration.Settings?.DocumentationRules?.CompanyName;
                     }
                 }
             }
