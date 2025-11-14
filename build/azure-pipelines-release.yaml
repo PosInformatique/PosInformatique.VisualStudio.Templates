@@ -18,6 +18,8 @@ jobs:
 - job: Build
   displayName: Build the Visual Studio Templates
   steps:
+  - checkout: self
+  
   - task: PowerShell@2
     name: UpdateBuildNumber
     displayName: Update build number
