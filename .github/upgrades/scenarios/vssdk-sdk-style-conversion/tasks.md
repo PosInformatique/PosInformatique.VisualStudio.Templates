@@ -1,4 +1,4 @@
-**Progress**: 3/5 tasks complete <progress value="60" max="100"></progress> 60%
+**Progress**: 4/5 tasks complete <progress value="80" max="100"></progress> 80%
 **Progress**: 2/5 tasks complete <progress value="40" max="100"></progress> 40%
 **Progress**: 2/5 tasks complete <progress value="40" max="100"></progress> 40%
 **Progress**: 1/5 tasks complete <progress value="20" max="100"></progress> 20%
@@ -10,6 +10,6 @@
 - ✅ 02-convert-main-vsix-project: Convert VisualStudio.Templates.csproj to SDK-style with VSSDK overlay ([Content](tasks/02-convert-main-vsix-project/task.md), [Progress](tasks/02-convert-main-vsix-project/progress-details.md))
 - ✅ 03-convert-templates-files-project: Convert VisualStudio.Templates.Files.csproj to SDK-style ([Content](tasks/03-convert-templates-files-project/task.md), [Progress](tasks/03-convert-templates-files-project/progress-details.md))
 - 🔄 03-convert-templates-files-project: Convert VisualStudio.Templates.Files.csproj to SDK-style ([Content](tasks/03-convert-templates-files-project/task.md))
-- 🔲 03-convert-templates-files-project: Convert VisualStudio.Templates.Files.csproj to SDK-style
+- ✅ 04-update-solution-deploy-markers: Add deploy markers for VSIX debugging ([Content](tasks/04-update-solution-deploy-markers/task.md), [Progress](tasks/04-update-solution-deploy-markers/progress-details.md))
 - 🔲 04-update-solution-deploy-markers: Add deploy markers for VSIX debugging
 - 🔲 05-reload-and-validate: Reload projects and validate build output
