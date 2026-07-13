@@ -12,6 +12,8 @@
     <VsixDeployOnDebug>true</VsixDeployOnDebug>
     <UseCodebase>true</UseCodebase>
     <NoWarn>$(NoWarn);NU1603</NoWarn>
+    <RootNamespace>PosInformatique.VisualStudio.Templates</RootNamespace>
+    <AssemblyName>PosInformatique.VisualStudio.Templates</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Properties\**" />
