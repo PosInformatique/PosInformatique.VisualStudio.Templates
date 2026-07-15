@@ -29,6 +29,22 @@ namespace PosInformatique.VisualStudio.Templates
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            if (projectItem == null)
+            {
+                return;
+            }
+
+            // Get the file path of the generated item
+            var filePath = projectItem.FileNames[1];
+
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+            {
+                return;
+            }
+
+            InsertFinalNewLine(filePath);
         }
 
         public void RunFinished()
@@ -137,6 +153,38 @@ namespace PosInformatique.VisualStudio.Templates
             }
 
             return null;
+        }
+
+        private static void InsertFinalNewLine(string filePath)
+        {
+            var editorConfig = new EditorConfig();
+
+            var insertFinalNewLine = true;
+            var insertFinalNewLineConfig = editorConfig.GetInsertFinalNewline(filePath);
+
+            // If editorconfig specifies a value, use it; otherwise keep default (true)
+            if (insertFinalNewLineConfig.HasValue)
+            {
+                insertFinalNewLine = insertFinalNewLineConfig.Value;
+            }
+
+            // Read the file content
+            var content = File.ReadAllText(filePath);
+
+            // Adjust final newline based on editorconfig setting
+            var endsWithNewLine = content.EndsWith("\n") || content.EndsWith("\r\n");
+
+            if (insertFinalNewLine && !endsWithNewLine)
+            {
+                // Add final newline if needed
+                File.AppendAllText(filePath, Environment.NewLine);
+            }
+            else if (!insertFinalNewLine && endsWithNewLine)
+            {
+                // Remove final newline(s) if present
+                content = content.TrimEnd('\r', '\n');
+                File.WriteAllText(filePath, content);
+            }
         }
     }
 }

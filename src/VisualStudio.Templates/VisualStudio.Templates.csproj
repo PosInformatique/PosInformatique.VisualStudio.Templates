@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="editorconfig" Version="0.16.2" />
     <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.14.40265" ExcludeAssets="runtime">
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -67,5 +68,9 @@
 
   <ItemGroup>
     <SuppressFromVsix Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="EditorConfig\EditorConfig.cs" />
   </ItemGroup>
 </Project>
