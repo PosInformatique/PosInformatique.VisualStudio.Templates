@@ -60,8 +60,4 @@
       <Compile Include="$(IntermediateOutputPath)Version.cs" />
     </ItemGroup>
   </Target>
-
-  <ItemGroup>
-    <None Include="EditorConfig\EditorConfig.cs" />
-  </ItemGroup>
 </Project>

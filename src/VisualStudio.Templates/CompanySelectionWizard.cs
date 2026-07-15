@@ -44,7 +44,10 @@ namespace PosInformatique.VisualStudio.Templates
                 return;
             }
 
-            InsertFinalNewLine(filePath);
+            var editorConfig = new EditorConfig();
+
+            ApplyNamespaceStyle(filePath, editorConfig);
+            InsertFinalNewLine(filePath, editorConfig);
         }
 
         public void RunFinished()
@@ -155,10 +158,26 @@ namespace PosInformatique.VisualStudio.Templates
             return null;
         }
 
-        private static void InsertFinalNewLine(string filePath)
+        private static void ApplyNamespaceStyle(string filePath, EditorConfig editorConfig)
         {
-            var editorConfig = new EditorConfig();
+            if (!filePath.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
 
+            var useFileScoped = editorConfig.GetUseFileScopedNamespace(filePath);
+
+            if (useFileScoped)
+            {
+                var content = File.ReadAllText(filePath);
+                var newContent = NamespaceRewriter.ConvertBlockToFileScoped(content);
+
+                File.WriteAllText(filePath, newContent);
+            }
+        }
+
+        private static void InsertFinalNewLine(string filePath, EditorConfig editorConfig)
+        {
             var insertFinalNewLine = true;
             var insertFinalNewLineConfig = editorConfig.GetInsertFinalNewline(filePath);
 

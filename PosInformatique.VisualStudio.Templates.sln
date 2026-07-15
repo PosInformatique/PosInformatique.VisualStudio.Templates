@@ -1,11 +1,11 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33516.290
+# Visual Studio Version 18
+VisualStudioVersion = 18.7.11919.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB492879-5CE3-41D7-BA27-A510EDBBCFB3}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
 		README.md = README.md
 		VisualStudio.Templates.package.proj = VisualStudio.Templates.package.proj
 	EndProjectSection
@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{6644E57B
 	ProjectSection(SolutionItems) = preProject
 		build\azure-pipelines-release.yaml = build\azure-pipelines-release.yaml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudio.Templates.UnitTests", "tests\VisualStudio.Templates.UnitTests\VisualStudio.Templates.UnitTests.csproj", "{538FD53A-276C-4D82-96DB-F5CDDB79B12D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,18 @@ Global
 		{06484D50-3945-4798-9DD2-DE3AD526EB44}.Release|arm64.Build.0 = Release|arm64
 		{06484D50-3945-4798-9DD2-DE3AD526EB44}.Release|x86.ActiveCfg = Release|x86
 		{06484D50-3945-4798-9DD2-DE3AD526EB44}.Release|x86.Build.0 = Release|x86
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Debug|arm64.Build.0 = Debug|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Debug|x86.Build.0 = Debug|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Release|arm64.ActiveCfg = Release|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Release|arm64.Build.0 = Release|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Release|x86.ActiveCfg = Release|Any CPU
+		{538FD53A-276C-4D82-96DB-F5CDDB79B12D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
