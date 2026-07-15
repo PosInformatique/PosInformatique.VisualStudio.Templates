@@ -15,11 +15,6 @@
     <RootNamespace>PosInformatique.VisualStudio.Templates</RootNamespace>
     <AssemblyName>PosInformatique.VisualStudio.Templates</AssemblyName>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Properties\**" />
-    <EmbeddedResource Remove="Properties\**" />
-    <None Remove="Properties\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectCapability Include="CreateVsixContainer" />
@@ -65,10 +60,6 @@
       <Compile Include="$(IntermediateOutputPath)Version.cs" />
     </ItemGroup>
   </Target>
-
-  <ItemGroup>
-    <SuppressFromVsix Remove="Properties\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="EditorConfig\EditorConfig.cs" />
