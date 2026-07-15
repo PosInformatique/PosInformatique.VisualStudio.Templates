@@ -12,7 +12,7 @@
 
     <_SolutionDir>$(MSBuildProjectDirectory)\</_SolutionDir>
 
-    <_VsSDKBuildToolsFolder>$(NUGET_PACKAGES)microsoft.vssdk.buildtools\$(VisualStudioSdkBuildToolsVersion)\tools\vssdk\</_VsSDKBuildToolsFolder>
+    <_VsSDKBuildToolsFolder>$(NUGET_PACKAGES)\microsoft.vssdk.buildtools\$(VisualStudioSdkBuildToolsVersion)\tools\vssdk\</_VsSDKBuildToolsFolder>
     <_VsixUtil>$(_VsSDKBuildToolsFolder)bin\VsixUtil.exe</_VsixUtil>
   </PropertyGroup>
 
