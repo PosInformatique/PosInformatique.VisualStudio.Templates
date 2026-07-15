@@ -7,7 +7,6 @@
 namespace PosInformatique.VisualStudio.Templates.UnitTests
 {
     using System.IO;
-    using System.Reflection;
     using Xunit;
 
     public class NamespaceRewriterTest
@@ -35,7 +34,7 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
             var content = File.ReadAllText(templatePath);
             content = ReplaceTemplateVariables(content);
 
-            var converted = ConvertBlockToFileScoped(content);
+            var converted = NamespaceRewriter.ConvertBlockToFileScoped(content);
 
             await Verify(converted).UseFileName($"NamespaceRewriterTest_{templateFileName}_FileScoped");
         }
@@ -50,16 +49,6 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
                 .Replace("$safeitemrootname$", SafeItemRootName)
                 .Replace("$namespaceundertest$", NamespaceUnderTest)
                 .Replace("$classnameundertest$", ClassNameUnderTest);
-        }
-
-        private static string ConvertBlockToFileScoped(string content)
-        {
-            var namespaceRewriterType = Assembly.Load("PosInformatique.VisualStudio.Templates")
-                .GetType("PosInformatique.VisualStudio.Templates.NamespaceRewriter", throwOnError: true);
-
-            var method = namespaceRewriterType.GetMethod("ConvertBlockToFileScoped", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
-
-            return (string)method.Invoke(null, [content]);
         }
 
         private static string GetRepositoryRootPath()

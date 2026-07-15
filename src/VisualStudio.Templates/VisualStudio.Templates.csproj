@@ -6,7 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>PosInformatiqueVisualStudioTemplates.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\PosInformatiqueVisualStudioTemplates.snk</AssemblyOriginatorKeyFile>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <VSSDKBuildToolsAutoSetup>true</VSSDKBuildToolsAutoSetup>
     <VsixDeployOnDebug>true</VsixDeployOnDebug>

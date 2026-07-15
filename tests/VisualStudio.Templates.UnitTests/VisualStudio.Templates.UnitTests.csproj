@@ -8,6 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <AssemblyName>PosInformatique.VisualStudio.Templates.UnitTests</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\PosInformatiqueVisualStudioTemplates.snk</AssemblyOriginatorKeyFile>
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
 
