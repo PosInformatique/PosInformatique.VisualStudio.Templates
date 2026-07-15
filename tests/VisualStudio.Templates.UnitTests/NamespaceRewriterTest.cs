@@ -6,8 +6,6 @@
 
 namespace PosInformatique.VisualStudio.Templates.UnitTests
 {
-    using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
 
@@ -27,39 +25,33 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
             var templatesDirectory = Path.Combine(repositoryRoot, "src", "VisualStudio.Templates.Files");
             var expectedDirectory = Path.Combine(repositoryRoot, "tests", "VisualStudio.Templates.UnitTests");
 
-            return new[]
-            {
-                new object[]
-                {
+            return
+            [
+                [
                     Path.Combine(templatesDirectory, "Class.cs"),
                     Path.Combine(expectedDirectory, "NamespaceRewriterTest_Class.cs_FileScoped.expected"),
-                },
-                new object[]
-                {
+                ],
+                [
                     Path.Combine(templatesDirectory, "Exception.cs"),
                     Path.Combine(expectedDirectory, "NamespaceRewriterTest_Exception.cs_FileScoped.expected"),
-                },
-                new object[]
-                {
+                ],
+                [
                     Path.Combine(templatesDirectory, "ExceptionUnitTest.cs"),
                     Path.Combine(expectedDirectory, "NamespaceRewriterTest_ExceptionUnitTest.cs_FileScoped.expected"),
-                },
-                new object[]
-                {
+                ],
+                [
                     Path.Combine(templatesDirectory, "Interface.cs"),
                     Path.Combine(expectedDirectory, "NamespaceRewriterTest_Interface.cs_FileScoped.expected"),
-                },
-                new object[]
-                {
+                ],
+                [
                     Path.Combine(templatesDirectory, "RazorComponent.razor.cs"),
                     Path.Combine(expectedDirectory, "NamespaceRewriterTest_RazorComponent.razor.cs_FileScoped.expected"),
-                },
-                new object[]
-                {
+                ],
+                [
                     Path.Combine(templatesDirectory, "XUnitTest.cs"),
                     Path.Combine(expectedDirectory, "NamespaceRewriterTest_XUnitTest.cs_FileScoped.expected"),
-                },
-            };
+                ],
+            ];
         }
 
         [Theory]
@@ -95,7 +87,7 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
 
             var method = namespaceRewriterType.GetMethod("ConvertBlockToFileScoped", BindingFlags.Static | BindingFlags.Public);
 
-            return (string)method.Invoke(null, new object[] { content });
+            return (string)method.Invoke(null, [content]);
         }
 
         private static string GetRepositoryRootPath()

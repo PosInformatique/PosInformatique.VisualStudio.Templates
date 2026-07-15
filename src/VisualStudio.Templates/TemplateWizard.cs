@@ -6,14 +6,11 @@
 
 namespace PosInformatique.VisualStudio.Templates
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.IO;
     using EnvDTE;
-    using Microsoft.VisualStudio.TemplateWizard;
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Shell.Interop;
-    using System.IO;
+    using Microsoft.VisualStudio.TemplateWizard;
 
     public class TemplateWizard : IWizard
     {
@@ -54,9 +51,11 @@ namespace PosInformatique.VisualStudio.Templates
         {
         }
 
-        public void RunStarted(object automationObject,
+        public void RunStarted(
+            object automationObject,
             Dictionary<string, string> replacementsDictionary,
-            WizardRunKind runKind, object[] customParams)
+            WizardRunKind runKind,
+            object[] customParams)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 

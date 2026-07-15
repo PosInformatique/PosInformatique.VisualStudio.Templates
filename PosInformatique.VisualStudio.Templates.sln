@@ -4,9 +4,13 @@ VisualStudioVersion = 18.7.11919.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB492879-5CE3-41D7-BA27-A510EDBBCFB3}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		LICENSE = LICENSE
 		README.md = README.md
+		stylecop.json = stylecop.json
 		VisualStudio.Templates.package.proj = VisualStudio.Templates.package.proj
 	EndProjectSection
 EndProject

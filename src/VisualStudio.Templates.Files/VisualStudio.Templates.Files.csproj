@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
@@ -18,9 +19,11 @@
     <SkipCompilerExecution>true</SkipCompilerExecution>
     <VSSDKBuildToolsAutoSetup>true</VSSDKBuildToolsAutoSetup>
   </PropertyGroup>
+  
   <ItemGroup>
     <ProjectCapability Include="CreateVsixContainer" />
   </ItemGroup>
+  
   <ItemGroup>
     <Compile Remove="Class.cs" />
     <Compile Remove="Exception.cs" />
@@ -29,6 +32,7 @@
     <Compile Remove="RazorComponent.razor.cs" />
     <Compile Remove="XUnitTest.cs" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Include="Class.cs" />
     <None Include="Exception.cs" />
@@ -38,6 +42,7 @@
     <None Include="RazorComponent.razor.cs" />
     <None Include="XUnitTest.cs" />
   </ItemGroup>
+  
   <ItemGroup>
     <VSTemplate Include="Class.vstemplate" OutputSubPath="P.O.S Informatique" />
     <VSTemplate Include="Exception.vstemplate" OutputSubPath="P.O.S Informatique" />
@@ -46,12 +51,11 @@
     <VSTemplate Include="RazorComponent.vstemplate" OutputSubPath="P.O.S Informatique" />
     <VSTemplate Include="XUnitTest.vstemplate" OutputSubPath="P.O.S Informatique" />
   </ItemGroup>
+  
   <ItemGroup>
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="18.5.40034">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" />
   </ItemGroup>
+  
   <Target Name="BeforeBuild">
     <!-- Update the version of Wizard to use -->
     <PropertyGroup>
@@ -61,6 +65,7 @@
     </PropertyGroup>
     <XmlPoke XmlInputPath="%(VSTemplate.Identity)" Value="PosInformatique.VisualStudio.Templates, Version=$(Version), Culture=Neutral, PublicKeyToken=889b4f35d1c32a46" Query="/vs:VSTemplate/vs:WizardExtension/vs:Assembly" Namespaces="$(_VSTemplateNamespaces)" />
   </Target>
+  
   <Target Name="AfterBuild">
     <!-- Restore the version of Wizard to 0.0.0.0 -->
     <PropertyGroup>
@@ -70,4 +75,5 @@
     </PropertyGroup>
     <XmlPoke XmlInputPath="%(VSTemplate.Identity)" Value="PosInformatique.VisualStudio.Templates, Version=0.0.0.0, Culture=Neutral, PublicKeyToken=889b4f35d1c32a46" Query="/vs:VSTemplate/vs:WizardExtension/vs:Assembly" Namespaces="$(_VSTemplateNamespaces)" />
   </Target>
+  
 </Project>

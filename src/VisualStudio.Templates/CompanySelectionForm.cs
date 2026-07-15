@@ -1,8 +1,11 @@
-﻿namespace PosInformatique.VisualStudio.Templates
+﻿//-----------------------------------------------------------------------
+// <copyright file="CompanySelectionForm.cs" company="P.O.S Informatique">
+//     Copyright (c) P.O.S Informatique. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace PosInformatique.VisualStudio.Templates
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Windows.Forms;
 
     internal partial class CompanySelectionForm : Form
