@@ -13,6 +13,7 @@
     <_SolutionDir>$(MSBuildProjectDirectory)\</_SolutionDir>
 
     <_NuGetPackageFolder Condition="'$(NUGET_PACKAGES)' == ''">$(USERPROFILE)\.nuget\packages\</_NuGetPackageFolder>
+    <_NuGetPackageFolder Condition="'$(NUGET_PACKAGES)' != ''">$(NUGET_PACKAGES)\</_NuGetPackageFolder>
     <_VsSDKBuildToolsFolder>$(_NuGetPackageFolder)microsoft.vssdk.buildtools\$(VisualStudioSdkBuildToolsVersion)\tools\vssdk\</_VsSDKBuildToolsFolder>
     <_VsixUtil>$(_VsSDKBuildToolsFolder)bin\VsixUtil.exe</_VsixUtil>
   </PropertyGroup>
