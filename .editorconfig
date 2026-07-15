@@ -34,10 +34,13 @@ csharp_using_directive_placement = inside_namespace:warning
 # (Currently define to suggestion because the issue: https://github.com/dotnet/roslyn/issues/41640)
 # dotnet_diagnostic.IDE0005.severity = suggestion
 
+# IDE0130: Namespace does not match folder structure
+dotnet_diagnostic.IDE0130.severity = none
+
 ### Sonar
 
-### Verify
-[*.{received,verified}.{html}]
+# Verify
+[*.{received,verified}.{txt}]
 charset = utf-8-bom
 end_of_line = lf
 indent_size = unset
@@ -45,7 +48,3 @@ indent_style = unset
 insert_final_newline = false
 tab_width = unset
 trim_trailing_whitespace = false
-
-[*.{received,verified}.{html}]
-indent_size = 2
-indent_style = space

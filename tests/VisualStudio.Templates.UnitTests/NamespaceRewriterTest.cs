@@ -8,6 +8,7 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
 {
     using System.IO;
     using System.Reflection;
+    using Xunit;
 
     public class NamespaceRewriterTest
     {
@@ -19,53 +20,24 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
         private const string NamespaceUnderTest = "PosInformatique.VisualStudio.Templates.NamespaceUnderTest";
         private const string ClassNameUnderTest = "TheClassUnderTest";
 
-        public static IEnumerable<object[]> GetTemplateCsFiles()
+        [Theory]
+        [InlineData("Class.cs")]
+        [InlineData("Exception.cs")]
+        [InlineData("ExceptionUnitTest.cs")]
+        [InlineData("Interface.cs")]
+        [InlineData("RazorComponent.razor.cs")]
+        [InlineData("XUnitTest.cs")]
+        public async Task ConvertBlockToFileScoped_WithTemplateContent_MatchesExpected(string templateFileName)
         {
             var repositoryRoot = GetRepositoryRootPath();
-            var templatesDirectory = Path.Combine(repositoryRoot, "src", "VisualStudio.Templates.Files");
-            var expectedDirectory = Path.Combine(repositoryRoot, "tests", "VisualStudio.Templates.UnitTests");
+            var templatePath = Path.Combine(repositoryRoot, "src", "VisualStudio.Templates.Files", templateFileName);
 
-            return
-            [
-                [
-                    Path.Combine(templatesDirectory, "Class.cs"),
-                    Path.Combine(expectedDirectory, "NamespaceRewriterTest_Class.cs_FileScoped.expected"),
-                ],
-                [
-                    Path.Combine(templatesDirectory, "Exception.cs"),
-                    Path.Combine(expectedDirectory, "NamespaceRewriterTest_Exception.cs_FileScoped.expected"),
-                ],
-                [
-                    Path.Combine(templatesDirectory, "ExceptionUnitTest.cs"),
-                    Path.Combine(expectedDirectory, "NamespaceRewriterTest_ExceptionUnitTest.cs_FileScoped.expected"),
-                ],
-                [
-                    Path.Combine(templatesDirectory, "Interface.cs"),
-                    Path.Combine(expectedDirectory, "NamespaceRewriterTest_Interface.cs_FileScoped.expected"),
-                ],
-                [
-                    Path.Combine(templatesDirectory, "RazorComponent.razor.cs"),
-                    Path.Combine(expectedDirectory, "NamespaceRewriterTest_RazorComponent.razor.cs_FileScoped.expected"),
-                ],
-                [
-                    Path.Combine(templatesDirectory, "XUnitTest.cs"),
-                    Path.Combine(expectedDirectory, "NamespaceRewriterTest_XUnitTest.cs_FileScoped.expected"),
-                ],
-            ];
-        }
-
-        [Theory]
-        [MemberData(nameof(GetTemplateCsFiles))]
-        public void ConvertBlockToFileScoped_WithTemplateContent_MatchesExpected(string templateFilePath, string expectedFilePath)
-        {
-            var content = File.ReadAllText(templateFilePath);
-            var expected = File.ReadAllText(expectedFilePath);
-
+            var content = File.ReadAllText(templatePath);
             content = ReplaceTemplateVariables(content);
 
             var converted = ConvertBlockToFileScoped(content);
 
-            Assert.Equal(expected, converted);
+            await Verify(converted).UseFileName($"NamespaceRewriterTest_{templateFileName}_FileScoped");
         }
 
         private static string ReplaceTemplateVariables(string content)
@@ -85,7 +57,7 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
             var namespaceRewriterType = Assembly.Load("PosInformatique.VisualStudio.Templates")
                 .GetType("PosInformatique.VisualStudio.Templates.NamespaceRewriter", throwOnError: true);
 
-            var method = namespaceRewriterType.GetMethod("ConvertBlockToFileScoped", BindingFlags.Static | BindingFlags.Public);
+            var method = namespaceRewriterType.GetMethod("ConvertBlockToFileScoped", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
 
             return (string)method.Invoke(null, [content]);
         }
