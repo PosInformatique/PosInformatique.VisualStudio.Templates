@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="BrandSelectionWizard.cs" company="P.O.S Informatique">
+// <copyright file="TemplateWizard.cs" company="P.O.S Informatique">
 //     Copyright (c) P.O.S Informatique. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace PosInformatique.VisualStudio.Templates
     using Microsoft.VisualStudio.Shell.Interop;
     using System.IO;
 
-    public class CompanySelectionWizard : IWizard
+    public class TemplateWizard : IWizard
     {
         private bool shouldAddProjectItem;
 
