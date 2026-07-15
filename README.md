@@ -1,4 +1,4 @@
-# P.O.S Informatique Visual Studio Templates
+﻿# P.O.S Informatique Visual Studio Templates
 
 This repository contains Visual Studio templates from P.O.S Informatique and can be used
 as *white-label* templates when working for different customers.
@@ -94,7 +94,7 @@ To build the VSIX package:
 - Execute the following command:
 
 ```cmd
-msbuild PosInformatique.VisualStudio.Templates.package.proj /t:Build /p:OutDir="<Output folder>"
+msbuild VisualStudio.Templates.package.proj /t:Build /p:OutDir="<Output folder>"
 ```
 
 Where `<Output folder>` is the folder where the VSIX package will be generated.
@@ -106,7 +106,7 @@ To generate the ATOM feed:
 - Execute the following command:
 
 ```cmd
-msbuild PosInformatique.VisualStudio.Templates.package.proj /t:Publish /p:OutDir="<Output folder>" /p:PublishUrl="<Publish URL>"
+msbuild VisualStudio.Templates.package.proj /t:Publish /p:OutDir="<Output folder>" /p:PublishUrl="<Publish URL>"
 ```
 
 With:
