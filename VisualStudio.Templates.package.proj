@@ -1,12 +1,12 @@
 ﻿<Project DefaultTargets="Build">
 
   <PropertyGroup>
-		<Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
-		<Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
-		
-		<Version Condition="'$(Version)' == ''">1.0.0</Version>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+    
+    <Version Condition="'$(Version)' == ''">1.0.0</Version>
 
-		<OutputPath>bin\$(Configuration)\</OutputPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
 
     <_SolutionDir>$(MSBuildProjectDirectory)\</_SolutionDir>
 
@@ -21,36 +21,36 @@
   </Target>
 
   <Target Name="Clean" DependsOnTargets="Init">
-		<RemoveDir Condition="Exists('$(OutDir)')" Directories="$(OutDir)" />
-	</Target>
-	
-	<Target Name="Build" DependsOnTargets="Clean">
-		
-		<!-- Updates the version of the VSIX package -->
-		<PropertyGroup>
-			<_VsixManifestNamespaces>
-				<Namespace Prefix="vsx" Uri="http://schemas.microsoft.com/developer/vsx-schema/2011" />
-			</_VsixManifestNamespaces>
-		</PropertyGroup>
-		
-		<XmlPoke
-				XmlInputPath="$(_SolutionDir)src\VisualStudio.Templates\source.extension.vsixmanifest"
-				Value="$(Version)"
-				Query="/vsx:PackageManifest/vsx:Metadata/vsx:Identity/@Version"
-				Namespaces="$(_VsixManifestNamespaces)"/>
+    <RemoveDir Condition="Exists('$(OutDir)')" Directories="$(OutDir)" />
+  </Target>
+  
+  <Target Name="Build" DependsOnTargets="Clean">
+    
+    <!-- Updates the version of the VSIX package -->
+    <PropertyGroup>
+      <_VsixManifestNamespaces>
+        <Namespace Prefix="vsx" Uri="http://schemas.microsoft.com/developer/vsx-schema/2011" />
+      </_VsixManifestNamespaces>
+    </PropertyGroup>
+    
+    <XmlPoke
+        XmlInputPath="$(_SolutionDir)src\VisualStudio.Templates\source.extension.vsixmanifest"
+        Value="$(Version)"
+        Query="/vsx:PackageManifest/vsx:Metadata/vsx:Identity/@Version"
+        Namespaces="$(_VsixManifestNamespaces)"/>
 
-		<!-- Build the Visual Studio Templates VSIX -->
-		<MSBuild Projects="$(_SolutionDir)src\VisualStudio.Templates\VisualStudio.Templates.csproj"
-						 Properties="
-							Configuration=$(Configuration);
-							Platform=$(Platform);
-							OutputPath=$(OutputPath);
-							OutDir=$(OutputPath)" />
+    <!-- Build the Visual Studio Templates VSIX -->
+    <MSBuild Projects="$(_SolutionDir)src\VisualStudio.Templates\VisualStudio.Templates.csproj"
+             Properties="
+              Configuration=$(Configuration);
+              Platform=$(Platform);
+              OutputPath=$(OutputPath);
+              OutDir=$(OutputPath)" />
 
     <!-- Copy the VSIX to the output folder -->
-		<Copy SourceFiles="$(_SolutionDir)src\VisualStudio.Templates\$(OutputPath)PosInformatique.VisualStudio.Templates.vsix"
-					DestinationFolder="$(OutDir)\PosInformatique Visual Studio Templates" />
-	</Target>
+    <Copy SourceFiles="$(_SolutionDir)src\VisualStudio.Templates\$(OutputPath)PosInformatique.VisualStudio.Templates.vsix"
+          DestinationFolder="$(OutDir)\PosInformatique Visual Studio Templates" />
+  </Target>
 
   <Target Name="Publish" DependsOnTargets="Build">
     
@@ -65,10 +65,10 @@
     </PropertyGroup>
 
     <XmlPoke
-				XmlInputPath="$(OutDir)\PosInformatique Visual Studio Templates\gallery.xml"
-				Value="$(PublishUrl)PosInformatique.VisualStudio.Templates_Icon_logo.jpg"
-				Query="/atom:feed/atom:entry/atom:link/@href"
-				Namespaces="$(_AtomNamespaces)"/>
+        XmlInputPath="$(OutDir)\PosInformatique Visual Studio Templates\gallery.xml"
+        Value="$(PublishUrl)PosInformatique.VisualStudio.Templates_Icon_logo.jpg"
+        Query="/atom:feed/atom:entry/atom:link/@href"
+        Namespaces="$(_AtomNamespaces)"/>
     
     <!-- Generate the web.config at the OutDir folder to allow download VSIX -->
     <PropertyGroup>
