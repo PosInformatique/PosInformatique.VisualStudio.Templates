@@ -79,6 +79,10 @@ The [PosInformatique.VisualStudio.Templates.sln](PosInformatique.VisualStudio.Te
     - [RazorComponent.razor.cs](./src/VisualStudio.Templates.Files/RazorComponent.razor.cs): Razor component code behind (in C#).
   - [XUnitTest.cs](./src/VisualStudio.Templates.Files/XUnitTest.cs): C# XUnit test class
 
+All templates respect the `.editorconfig` settings of your project, particularly for:
+- `insert_final_newline`: Automatically adds a final newline at the end of files
+- `csharp_style_namespace_declarations`: Respects your namespace style preference (file-scoped or block-scoped)
+
 ![Templates](docs/Templates.png)
 
 ## Packaging of the Visual Studio Templates
