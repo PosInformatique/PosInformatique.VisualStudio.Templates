@@ -32,9 +32,11 @@ csharp_using_directive_placement = inside_namespace:warning
 
 ### Visual Studio
 
+# IDE0001: Simplify name
+dotnet_diagnostic.IDE0001.severity = warning
+
 # IDE0005: Using directive is unnecessary.
-# (Currently define to suggestion because the issue: https://github.com/dotnet/roslyn/issues/41640)
-# dotnet_diagnostic.IDE0005.severity = suggestion
+dotnet_diagnostic.IDE0005.severity = warning
 
 # IDE0130: Namespace does not match folder structure
 dotnet_diagnostic.IDE0130.severity = none
