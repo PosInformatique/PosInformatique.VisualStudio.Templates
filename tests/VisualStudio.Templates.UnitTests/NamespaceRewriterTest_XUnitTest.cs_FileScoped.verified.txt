@@ -1,0 +1,20 @@
+//-----------------------------------------------------------------------
+// <copyright file="TheClass" company="P.O.S Informatique">
+//     Copyright (c) P.O.S Informatique. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace PosInformatique.VisualStudio.Templates.NamespaceTest;
+
+public class TheClass
+{
+    [Fact]
+    public void Constructor()
+    {
+    }
+
+    [Fact]
+    public void Method_StateUnderTest_ExpectedBehavior()
+    {
+    }
+}

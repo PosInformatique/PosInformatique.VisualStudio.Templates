@@ -1,0 +1,12 @@
+﻿{
+  "settings": {
+    "documentationRules": {
+      "companyName": "P.O.S Informatique",
+      "copyrightText": "Copyright (c) {companyName}. All rights reserved.",
+      "documentExposedElements": false,
+      "documentInternalElements": false,
+      "documentPrivateElements": false,
+      "documentPrivateFields": false
+    }
+  }
+}

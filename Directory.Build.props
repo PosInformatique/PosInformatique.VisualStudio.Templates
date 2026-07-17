@@ -1,0 +1,60 @@
+﻿<Project>
+
+  <!-- Common properties -->
+  <PropertyGroup>
+    <Authors>Gilles TOURREAU</Authors>
+    <Company>P.O.S Informatique</Company>
+    <Product>P.O.S Informatique Visual Studio Templates</Product>
+    <Copyright>Copyright (c) P.O.S Informatique. All rights reserved.</Copyright>
+    <RepositoryUrl>https://github.com/PosInformatique/PosInformatique.VisualStudio.Templates</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <!-- Enable the last version of C# -->
+    <LangVersion>latest</LangVersion>
+
+    <!-- Enable implict usings -->
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Activate code enforcement of the .editorconfig during the build -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <!--
+      IDE0005 (remove unnecessary usings) only fires during build when
+      a doc file is being generated; see https://github.com/dotnet/roslyn/issues/41640.
+      We don't want to force doc comments or fail on cref typos, so silence the
+      doc-comment warnings (CS1573 missing param doc) but keep doc generation on so
+      IDE0005 can fire.
+    -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591;S3904</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+  </ItemGroup>
+
+  <!-- Common NuGet packages -->
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="SonarAnalyzer.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- Add the default using directive for all the code -->
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.Collections.ObjectModel" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+//-----------------------------------------------------------------------
+// <copyright file="TheClass" company="P.O.S Informatique">
+//     Copyright (c) P.O.S Informatique. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace PosInformatique.VisualStudio.Templates.NamespaceTest;
+
+public class TheClass : Exception
+{
+    public TheClass()
+        : base()
+    {
+    }
+
+    public TheClass(string message)
+        : base(message)
+    {
+    }
+
+    public TheClass(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
+}

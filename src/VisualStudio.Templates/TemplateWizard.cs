@@ -1,21 +1,18 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="BrandSelectionWizard.cs" company="P.O.S Informatique">
+// <copyright file="TemplateWizard.cs" company="P.O.S Informatique">
 //     Copyright (c) P.O.S Informatique. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
 namespace PosInformatique.VisualStudio.Templates
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.IO;
     using EnvDTE;
-    using Microsoft.VisualStudio.TemplateWizard;
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Shell.Interop;
-    using System.IO;
+    using Microsoft.VisualStudio.TemplateWizard;
 
-    public class CompanySelectionWizard : IWizard
+    public class TemplateWizard : IWizard
     {
         private bool shouldAddProjectItem;
 
@@ -29,15 +26,36 @@ namespace PosInformatique.VisualStudio.Templates
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            if (projectItem == null)
+            {
+                return;
+            }
+
+            // Get the file path of the generated item
+            var filePath = projectItem.FileNames[1];
+
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+            {
+                return;
+            }
+
+            var editorConfig = new EditorConfig();
+
+            ApplyNamespaceStyle(filePath, editorConfig);
+            InsertFinalNewLine(filePath, editorConfig);
         }
 
         public void RunFinished()
         {
         }
 
-        public void RunStarted(object automationObject,
+        public void RunStarted(
+            object automationObject,
             Dictionary<string, string> replacementsDictionary,
-            WizardRunKind runKind, object[] customParams)
+            WizardRunKind runKind,
+            object[] customParams)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
@@ -137,6 +155,54 @@ namespace PosInformatique.VisualStudio.Templates
             }
 
             return null;
+        }
+
+        private static void ApplyNamespaceStyle(string filePath, EditorConfig editorConfig)
+        {
+            if (!filePath.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            var useFileScoped = editorConfig.GetUseFileScopedNamespace(filePath);
+
+            if (useFileScoped)
+            {
+                var content = File.ReadAllText(filePath);
+                var newContent = NamespaceRewriter.ConvertBlockToFileScoped(content);
+
+                File.WriteAllText(filePath, newContent);
+            }
+        }
+
+        private static void InsertFinalNewLine(string filePath, EditorConfig editorConfig)
+        {
+            var insertFinalNewLine = true;
+            var insertFinalNewLineConfig = editorConfig.GetInsertFinalNewline(filePath);
+
+            // If editorconfig specifies a value, use it; otherwise keep default (true)
+            if (insertFinalNewLineConfig.HasValue)
+            {
+                insertFinalNewLine = insertFinalNewLineConfig.Value;
+            }
+
+            // Read the file content
+            var content = File.ReadAllText(filePath);
+
+            // Adjust final newline based on editorconfig setting
+            var endsWithNewLine = content.EndsWith("\n") || content.EndsWith("\r\n");
+
+            if (insertFinalNewLine && !endsWithNewLine)
+            {
+                // Add final newline if needed
+                File.AppendAllText(filePath, Environment.NewLine);
+            }
+            else if (!insertFinalNewLine && endsWithNewLine)
+            {
+                // Remove final newline(s) if present
+                content = content.TrimEnd('\r', '\n');
+                File.WriteAllText(filePath, content);
+            }
         }
     }
 }
