@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------
 // <copyright file="NamespaceRewriter.cs" company="P.O.S Informatique">
 //     Copyright (c) P.O.S Informatique. All rights reserved.
 // </copyright>
@@ -12,6 +12,11 @@ namespace PosInformatique.VisualStudio.Templates
 
     internal static class NamespaceRewriter
     {
+        private static readonly Regex NamespaceRegex = new Regex(
+            @"^\s*namespace\s+(?<name>[^\r\n;{]+)\s*$",
+            RegexOptions.Compiled,
+            timeoutMilliseconds: 1000);
+
         public static string ConvertBlockToFileScoped(string content)
         {
             var lines = new List<string>(content.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None));
