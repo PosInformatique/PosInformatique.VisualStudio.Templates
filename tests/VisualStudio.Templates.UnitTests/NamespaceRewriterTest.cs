@@ -57,7 +57,7 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
 
             while (directory != null)
             {
-                var solutionFile = Path.Combine(directory.FullName, "PosInformatique.VisualStudio.Templates.sln");
+                var solutionFile = Path.Combine(directory.FullName, "PosInformatique.VisualStudio.Templates.slnx");
 
                 if (File.Exists(solutionFile))
                 {
@@ -67,7 +67,7 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
                 directory = directory.Parent;
             }
 
-            throw new DirectoryNotFoundException("Unable to locate PosInformatique.VisualStudio.Templates.sln from test base directory.");
+            throw new DirectoryNotFoundException("Unable to locate PosInformatique.VisualStudio.Templates.slnx from test base directory.");
         }
     }
 }

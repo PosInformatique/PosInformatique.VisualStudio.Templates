@@ -1,4 +1,4 @@
-parameters:
+﻿parameters:
 - name: Version
   displayName: The version of the Visual Studio Templates
   type: string
@@ -12,7 +12,7 @@ pool:
 variables:
   Configuration: Debug
   Platform: Any CPU
-  Solution: PosInformatique.VisualStudio.Templates.sln
+  Solution: PosInformatique.VisualStudio.Templates.slnx
 
 jobs:
 - job: Build
@@ -68,4 +68,3 @@ jobs:
       TakeAppOfflineFlag: false
       RemoveAdditionalFilesFlag: true
       ExcludeFilesFromAppDataFlag: false
-  

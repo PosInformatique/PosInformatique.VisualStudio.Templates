@@ -68,7 +68,7 @@ by saving additional information (inside files, .sln, ...) for this extension. W
 like the source code in the repository to remain separate from the Visual Studio extensions used.
 
 ## Visual Studio item templates
-The [PosInformatique.VisualStudio.Templates.sln](PosInformatique.VisualStudio.Templates.sln) solution contains 2 projects:
+The [PosInformatique.VisualStudio.Templates.slnx](PosInformatique.VisualStudio.Templates.slnx) solution contains 2 projects:
 - **VisualStudio.Templates**: Generates a VSIX package for the Visual Studio extension.
 - **VisualStudio.Templates.Files**: Contains the following item templates:
   - [Class.cs](./src/VisualStudio.Templates.Files/Class.cs): C# class
