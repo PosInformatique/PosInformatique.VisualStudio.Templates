@@ -15,7 +15,7 @@ namespace PosInformatique.VisualStudio.Templates
         private static readonly Regex NamespaceRegex = new Regex(
             @"^\s*namespace\s+(?<name>[^\r\n;{]+)\s*$",
             RegexOptions.Compiled,
-            timeoutMilliseconds: 1000);
+            TimeSpan.FromSeconds(1));
 
         public static string ConvertBlockToFileScoped(string content)
         {
@@ -26,7 +26,7 @@ namespace PosInformatique.VisualStudio.Templates
 
             for (var i = 0; i < lines.Count; i++)
             {
-                namespaceMatch = Regex.Match(lines[i], @"^\s*namespace\s+(?<name>[^\r\n;{]+)\s*$");
+                namespaceMatch = NamespaceRegex.Match(lines[i]);
 
                 if (namespaceMatch.Success)
                 {
