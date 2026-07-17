@@ -19,7 +19,7 @@ namespace PosInformatique.VisualStudio.Templates
 
         public static string ConvertBlockToFileScoped(string content)
         {
-            var lines = new List<string>(content.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None));
+            var lines = new List<string>(content.Split(["\r\n", "\n"], StringSplitOptions.None));
 
             var namespaceLineIndex = -1;
             Match namespaceMatch = null;
