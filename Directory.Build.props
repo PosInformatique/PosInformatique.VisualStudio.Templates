@@ -29,12 +29,6 @@
     <NoWarn>$(NoWarn);CS1591;S3904</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </AdditionalFiles>
-  </ItemGroup>
-
   <!-- Common NuGet packages -->
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers">
