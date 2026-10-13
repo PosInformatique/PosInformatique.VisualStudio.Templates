@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------
 // <copyright file="EditorConfig.cs" company="P.O.S Informatique">
 //     Copyright (c) P.O.S Informatique. All rights reserved.
 // </copyright>
@@ -30,6 +30,26 @@ namespace PosInformatique.VisualStudio.Templates
             catch (Exception)
             {
                 // If parsing fails, return null (fallback to default behavior)
+                return null;
+            }
+        }
+
+        public string GetStyleCopCompanyName(string targetFilePath)
+        {
+            try
+            {
+                var config = this.parser.Parse(targetFilePath);
+
+                if (config.Properties.TryGetValue("stylecop.documentation.companyname", out var value) &&
+                    !string.IsNullOrWhiteSpace(value))
+                {
+                    return value.Trim();
+                }
+
+                return null;
+            }
+            catch (Exception)
+            {
                 return null;
             }
         }
