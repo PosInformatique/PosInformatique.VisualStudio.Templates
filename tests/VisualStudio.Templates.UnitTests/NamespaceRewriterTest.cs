@@ -7,6 +7,7 @@
 namespace PosInformatique.VisualStudio.Templates.UnitTests
 {
     using System.IO;
+    using AwesomeAssertions;
     using Xunit;
 
     public class NamespaceRewriterTest
@@ -26,7 +27,7 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
         [InlineData("Interface.cs")]
         [InlineData("RazorComponent.razor.cs")]
         [InlineData("XUnitTest.cs")]
-        public async Task ConvertBlockToFileScoped_WithTemplateContent_MatchesExpected(string templateFileName)
+        public void ConvertBlockToFileScoped_WithTemplateContent_MatchesExpected(string templateFileName)
         {
             var repositoryRoot = GetRepositoryRootPath();
             var templatePath = Path.Combine(repositoryRoot, "src", "VisualStudio.Templates.Files", templateFileName);
@@ -36,7 +37,20 @@ namespace PosInformatique.VisualStudio.Templates.UnitTests
 
             var converted = NamespaceRewriter.ConvertBlockToFileScoped(content);
 
-            await Verify(converted).UseFileName($"NamespaceRewriterTest_{templateFileName}_FileScoped");
+            AssertMatchesExpected(converted, templateFileName);
+        }
+
+        private static void AssertMatchesExpected(string actual, string templateFileName)
+        {
+            var expectedPath = Path.Combine(GetRepositoryRootPath(), "tests", "VisualStudio.Templates.UnitTests", $"NamespaceRewriterTest_{templateFileName}_FileScoped.expected.txt");
+            var expected = File.ReadAllText(expectedPath);
+
+            Normalize(actual).Should().Be(Normalize(expected));
+        }
+
+        private static string Normalize(string value)
+        {
+            return value.Replace("\r\n", "\n");
         }
 
         private static string ReplaceTemplateVariables(string content)

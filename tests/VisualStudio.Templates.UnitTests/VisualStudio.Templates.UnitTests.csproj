@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.ValueTuple" />
-    <PackageReference Include="Verify.XunitV3" />
+    <PackageReference Include="AwesomeAssertions" />
     <PackageReference Include="xunit.v3.core.mtp-v2" />
   </ItemGroup>
 
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="NamespaceRewriterTest_*.verified.txt" DependentUpon="NamespaceRewriterTest.cs" />
+    <None Include="NamespaceRewriterTest_*.expected.txt" DependentUpon="NamespaceRewriterTest.cs" />
   </ItemGroup>
 
 </Project>
