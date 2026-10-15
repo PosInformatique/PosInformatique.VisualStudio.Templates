@@ -14,6 +14,8 @@ namespace PosInformatique.VisualStudio.Templates
 
     public class TemplateWizard : IWizard
     {
+        private readonly EditorConfig editorConfig = new EditorConfig();
+
         private bool shouldAddProjectItem;
 
         public void BeforeOpeningFile(ProjectItem projectItem)
@@ -41,10 +43,8 @@ namespace PosInformatique.VisualStudio.Templates
                 return;
             }
 
-            var editorConfig = new EditorConfig();
-
-            ApplyNamespaceStyle(filePath, editorConfig);
-            InsertFinalNewLine(filePath, editorConfig);
+            ApplyNamespaceStyle(filePath, this.editorConfig);
+            InsertFinalNewLine(filePath, this.editorConfig);
         }
 
         public void RunFinished()
@@ -59,60 +59,41 @@ namespace PosInformatique.VisualStudio.Templates
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            string company = null;
-
-            // Check if StyleCop settings file already exists
             var projectInteropWrapper = new ProjectInteropWrapper((IVsProject4)customParams[1]);
+            var safeItemName = replacementsDictionary["$safeitemname$"];
 
-            var styleCopSettingsFilePath = projectInteropWrapper.GetDocumentFilePath("stylecop.json");
+            var company = this.ResolveCompany((DTE)automationObject, projectInteropWrapper, safeItemName);
 
-            if (styleCopSettingsFilePath != null)
-            {
-                using (var fileStream = File.OpenRead(styleCopSettingsFilePath))
-                {
-                    var styleCopConfiguration = StyleCopConfiguration.LoadFrom(fileStream);
-
-                    if (styleCopConfiguration != null)
-                    {
-                        company = styleCopConfiguration.Settings?.DocumentationRules?.CompanyName;
-                    }
-                }
-            }
-
-            // If company is null ask the company to the developer
+            // The developer cancelled the company selection
             if (company == null)
             {
-                company = AskCompany((DTE)automationObject);
+                return;
             }
 
-            if (company != null)
+            replacementsDictionary.Add("$company$", company);
+
+            // For the unit tests, add a setting without "Test" suffix
+            var classNameUnderTest = safeItemName;
+
+            if (safeItemName.EndsWith("Test"))
             {
-                replacementsDictionary.Add("$company$", company);
-
-                // For the unit tests, add a setting without "Test" suffix
-                var safeItemName = replacementsDictionary["$safeitemname$"];
-                var classNameUnderTest = safeItemName;
-
-                if (safeItemName.EndsWith("Test"))
-                {
-                    classNameUnderTest = safeItemName.Substring(0, safeItemName.Length - "Test".Length);
-                }
-
-                replacementsDictionary.Add("$classnameundertest$", classNameUnderTest);
-
-                // For unit tests of the exception, add a setting without the "Tests" namespace suffix
-                var rootnamespace = replacementsDictionary["$rootnamespace$"];
-                var namespaceundertest = rootnamespace;
-
-                if (namespaceundertest.EndsWith("Tests"))
-                {
-                    namespaceundertest = namespaceundertest.Substring(0, namespaceundertest.Length - ".Tests".Length);
-                }
-
-                replacementsDictionary.Add("$namespaceundertest$", namespaceundertest);
-
-                this.shouldAddProjectItem = true;
+                classNameUnderTest = safeItemName.Substring(0, safeItemName.Length - "Test".Length);
             }
+
+            replacementsDictionary.Add("$classnameundertest$", classNameUnderTest);
+
+            // For unit tests of the exception, add a setting without the "Tests" namespace suffix
+            var rootnamespace = replacementsDictionary["$rootnamespace$"];
+            var namespaceundertest = rootnamespace;
+
+            if (namespaceundertest.EndsWith("Tests"))
+            {
+                namespaceundertest = namespaceundertest.Substring(0, namespaceundertest.Length - ".Tests".Length);
+            }
+
+            replacementsDictionary.Add("$namespaceundertest$", namespaceundertest);
+
+            this.shouldAddProjectItem = true;
         }
 
         public bool ShouldAddProjectItem(string filePath)
@@ -203,6 +184,46 @@ namespace PosInformatique.VisualStudio.Templates
                 content = content.TrimEnd('\r', '\n');
                 File.WriteAllText(filePath, content);
             }
+        }
+
+        private string ResolveCompany(DTE dte, ProjectInteropWrapper projectInteropWrapper, string safeItemName)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            // Check the StyleCop company name in the .editorconfig (from the project directory)
+            var projectDirectory = projectInteropWrapper.GetProjectDirectory();
+            string company = null;
+
+            if (projectDirectory != null)
+            {
+                company = this.editorConfig.GetStyleCopCompanyName(Path.Combine(projectDirectory, safeItemName + ".cs"));
+            }
+
+            if (company != null)
+            {
+                return company;
+            }
+
+            // Check if StyleCop settings file already exists
+            var styleCopSettingsFilePath = projectInteropWrapper.GetDocumentFilePath("stylecop.json");
+
+            if (styleCopSettingsFilePath != null)
+            {
+                using (var fileStream = File.OpenRead(styleCopSettingsFilePath))
+                {
+                    var styleCopConfiguration = StyleCopConfiguration.LoadFrom(fileStream);
+
+                    company = styleCopConfiguration?.Settings?.DocumentationRules?.CompanyName;
+
+                    if (company != null)
+                    {
+                        return company;
+                    }
+                }
+            }
+
+            // Ask the company to the developer
+            return AskCompany(dte);
         }
     }
 }

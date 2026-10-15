@@ -7,6 +7,14 @@ tab_width = 2
 
 ### Style Cop
 
+# Documentation rules settings (migrated from stylecop.json)
+stylecop.documentation.companyName = P.O.S Informatique
+stylecop.documentation.copyrightText = Copyright (c) {companyName}. All rights reserved.
+stylecop.documentation.documentExposedElements = false
+stylecop.documentation.documentInternalElements = false
+stylecop.documentation.documentPrivateElements = false
+stylecop.documentation.documentPrivateFields = false
+
 # Default severity for analyzer diagnostics with category 'StyleCop.CSharp.DocumentationRules'
 dotnet_analyzer_diagnostic.category-StyleCop.CSharp.DocumentationRules.severity = none
 
@@ -42,13 +50,3 @@ dotnet_diagnostic.IDE0005.severity = warning
 dotnet_diagnostic.IDE0130.severity = none
 
 ### Sonar
-
-# Verify
-[*.{received,verified}.{txt}]
-charset = utf-8-bom
-end_of_line = lf
-indent_size = unset
-indent_style = unset
-insert_final_newline = false
-tab_width = unset
-trim_trailing_whitespace = false

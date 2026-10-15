@@ -40,18 +40,20 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(80, 65);
+            label1.Location = new System.Drawing.Point(120, 100);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(54, 13);
+            label1.Size = new System.Drawing.Size(80, 20);
             label1.TabIndex = 1;
             label1.Text = "Company:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(12, 9);
+            label2.Location = new System.Drawing.Point(18, 14);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(328, 26);
+            label2.Size = new System.Drawing.Size(485, 40);
             label2.TabIndex = 2;
             label2.Text = "Define the name of the company you working for.\r\nThis name will be use in the hea" +
     "der of the source code files created.";
@@ -61,9 +63,10 @@
             this.company.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.company.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.company.FormattingEnabled = true;
-            this.company.Location = new System.Drawing.Point(135, 62);
+            this.company.Location = new System.Drawing.Point(208, 95);
+            this.company.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.company.Name = "company";
-            this.company.Size = new System.Drawing.Size(218, 21);
+            this.company.Size = new System.Drawing.Size(319, 28);
             this.company.TabIndex = 0;
             this.company.TextUpdate += new System.EventHandler(this.OnCompanyTextUpdate);
             // 
@@ -71,9 +74,10 @@
             // 
             this.ok.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.ok.Enabled = false;
-            this.ok.Location = new System.Drawing.Point(265, 107);
+            this.ok.Location = new System.Drawing.Point(398, 165);
+            this.ok.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ok.Name = "ok";
-            this.ok.Size = new System.Drawing.Size(75, 23);
+            this.ok.Size = new System.Drawing.Size(112, 35);
             this.ok.TabIndex = 3;
             this.ok.Text = "&OK";
             this.ok.UseVisualStyleBackColor = true;
@@ -82,9 +86,10 @@
             // cancel
             // 
             this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancel.Location = new System.Drawing.Point(349, 107);
+            this.cancel.Location = new System.Drawing.Point(524, 165);
+            this.cancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cancel.Name = "cancel";
-            this.cancel.Size = new System.Drawing.Size(75, 23);
+            this.cancel.Size = new System.Drawing.Size(112, 35);
             this.cancel.TabIndex = 4;
             this.cancel.Text = "&Cancel";
             this.cancel.UseVisualStyleBackColor = true;
@@ -93,16 +98,17 @@
             // CompanySelectionForm
             // 
             this.AcceptButton = this.ok;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancel;
-            this.ClientSize = new System.Drawing.Size(436, 142);
+            this.ClientSize = new System.Drawing.Size(654, 218);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.ok);
             this.Controls.Add(label2);
             this.Controls.Add(label1);
             this.Controls.Add(this.company);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CompanySelectionForm";

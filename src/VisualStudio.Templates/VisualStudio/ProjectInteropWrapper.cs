@@ -18,6 +18,21 @@ namespace PosInformatique.VisualStudio.Templates
             this.vsProject = project;
         }
 
+        public string GetProjectDirectory()
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            // VSITEMID_ROOT
+            const uint rootItemId = 0xFFFFFFFE;
+
+            if (this.vsProject.GetMkDocument(rootItemId, out var projectFilePath) != 0 || string.IsNullOrEmpty(projectFilePath))
+            {
+                return null;
+            }
+
+            return Path.GetDirectoryName(projectFilePath);
+        }
+
         public string GetDocumentFilePath(string name)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
